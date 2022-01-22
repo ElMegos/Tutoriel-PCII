@@ -1,33 +1,33 @@
+package View;
 
-import org.w3c.dom.events.MouseEvent;
+import Control.Control;
+import Model.Etat;
+
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.*;
 
 
 public class Affichage extends JPanel {
 
     public static final int HAUT = 400;
     public static final int LARG = 600;
-    public static  int hauteur = 300;
-    public static final int saut = 20;
 
+    public static Etat etat;
 
-    public  Affichage(){
+    public  Affichage(Etat etat){
+        this.etat = etat;
         JFrame fenetre = new JFrame("Test");
         fenetre.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setPreferredSize(new Dimension(LARG, HAUT));
         fenetre.add(this);
-        fenetre.addMouseListener( new Action(this));
+        fenetre.addMouseListener( new Control(this,etat));
         fenetre.pack();
         fenetre.setVisible(true);
+
     }
 
 
-    public void repaint(Graphics g){
-        g.drawOval(40,hauteur+saut,20,100);
-    }
 
     /**
      * Dessine l'oval et nettoie l'affichage
@@ -35,16 +35,8 @@ public class Affichage extends JPanel {
      */
     public void paint(Graphics g){
        super.paint(g);
-        g.drawOval(40,hauteur,20,100);
+        g.drawOval(40,this.etat.getHauteur(),20,100);
     }
 
-    /**
-     * Déplace l'oval vers le haut de la valeur de saut
-     */
-    public static void jump(){
-        if(hauteur>=saut){
-            hauteur -=saut;
-        }
 
-    }
 }
