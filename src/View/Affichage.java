@@ -6,6 +6,7 @@ import Model.Etat;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.ArrayList;
 
 
 public class Affichage extends JPanel {
@@ -43,7 +44,20 @@ public class Affichage extends JPanel {
 
         //Dessine l'oval
         g.drawOval(40,this.etat.getHAUTEUR(),LARGEUR_OVAL,HAUTEUR_OVAL);
+
+        ArrayList<Point> point = etat.getPoint();
+        g.setColor(Color.magenta);
+        for(int i = 1;i<point.size() ; i++){
+            Point p1 = point.get(i-1);
+            Point p2 = point.get(i);
+            g.drawLine(p1.x,p1.y,p2.x,p2.y);
+        }
+        g.setColor(Color.BLACK);
+        g.drawString("Score : " + etat.parcours.getPOSITION()/2 , etat.getWIDTH()-100 , 50);
     }
+
+
+
 
     /**
      * Renvoie la valeur de la largeur de l'oval
@@ -53,6 +67,7 @@ public class Affichage extends JPanel {
         return LARGEUR_OVAL;
     }
 
+
     /**
      * Renvoie la valeur de la hauteur de l'oval
      * @return
@@ -60,4 +75,13 @@ public class Affichage extends JPanel {
     public static int getHauteurOval() {
         return HAUTEUR_OVAL;
     }
+
+    /**
+     * Renvoie la valeur du milieu de l'oval
+     * @return
+     */
+    public static int getCentreXOval(){
+        return etat.HAUTEUR/2;
+    }
+
 }
