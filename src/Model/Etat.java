@@ -6,28 +6,68 @@ import java.awt.*;
 import java.util.ArrayList;
 
 public class Etat  {
-    public static final int HEIGHTMIN = 10;
-    public static final int HEIGHTMAX = 400;
+
+    /* Constante liee a l'affichage */
+    /**
+     * Const : Hauteur de l'affichage
+     */
+    public static final int HEIGHT = 400;
+    /**
+     * Const : Largeur de l'affichage
+     */
     public static final int WIDTH = 600;
+    /**
+     * Const : Hauteur minimale ou l'ovale peut aller
+     */
+    public static final int HEIGHTMIN = 10;
+    /**
+     * Const : Valeur max ou les points peuvent
+     * generes
+     */
     public static final int WIDTHMAX = WIDTH+200;
+    /**
+     * Const : Valeur min ou les points peuvent
+     * apparaitre avant d'etre enleves
+     */
     public static final int WIDTHMIN = -100;
-    public static int HAUTEUR = (HEIGHTMAX/2-10);
-    public static final int SAUT = 20;
-    public static final int DOWN = Affichage.getHauteurOval()/10;
+
+    /**
+     * Const : Hautreur min ou la courbe peut etre
+     */
     public static final int HAUTEURCADREMIN = 100;
+    /**
+     * COnst : Hauteur max ou la courbe peut etre
+     */
     public static final int HAUTEURCADREMAX = 300;
+
+    //Position de l'ovale
+    public static int HAUTEUR = (HEIGHT /2);
+    /**
+     * Const : Valeur d'un saut de l'ovale
+     */
+    public static final int SAUT = 20;
+    /**
+     * Const : Valeur de laquelle l'ovale descend
+     * a chaque appelle de la methode moveDownr()
+     */
+    public static final int DOWN = Affichage.getHauteurOvale()/10;
+
+    //Declaration d'un parcours
     public Parcours parcours;
 
+    //Constructeur de la classe
     public Etat(){
+        //Initialisation du thread Voler
         (new Voler(this)).start();
+        //Creation d'un parcours
         this.parcours = new Parcours();
+        //Initialisation du thread Avancer
         (new Avancer(this,this.parcours)).start();
     }
 
-
-
     /**
-     * Déplace l'oval vers le haut de la valeur de saut
+     * Fait monter l'ovale sur l'ecran de la valeur
+     * de SAUT a chaque appel
      */
     public void jump(){
         if(HAUTEUR > HEIGHTMIN){
@@ -37,10 +77,11 @@ public class Etat  {
     }
 
     /**
-     *
+     * Fait descendre l'ovale sur l'ecran de la valeur de DOWN
+     * a chaque appel
      */
     public void moveDown(){
-        if(HAUTEUR + DOWN < HEIGHTMAX-Affichage.getHauteurOval()){
+        if(HAUTEUR + DOWN < HEIGHT -Affichage.getHauteurOvale()){
             HAUTEUR += DOWN;
         }
     }
@@ -57,7 +98,7 @@ public class Etat  {
     }
 
     public static int getHEIGHTMAX() {
-        return HEIGHTMAX;
+        return HEIGHT;
     }
 
     public static int getWIDTH() {
@@ -88,4 +129,3 @@ public class Etat  {
         return WIDTHMIN;
     }
 }
-

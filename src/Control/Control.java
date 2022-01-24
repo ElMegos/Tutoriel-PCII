@@ -8,18 +8,29 @@ import java.awt.event.MouseListener;
 
 
 public class Control implements MouseListener {
-
+    //Declaration d'un affichage
     public static Affichage affichage;
+    //declaration d'un etat
     public static Etat etat;
 
+    //Constructeur de la classe
     public Control(Affichage affichage , Etat etat) {
         this.affichage = affichage;
         this.etat = etat;
     }
 
+    /**
+     * Prends les entrees de souris et effectue les actions
+     * en fonction de l'action executee
+     * @param e l'action
+     */
     @Override
+    //Lorsque l'on clique avec la souris
+    //dans la zone d'affichage
     public void mouseClicked(MouseEvent e) {
+        //Appelle la methode de saut de l'oval
         etat.jump();
+        //Reaffiche tout l'affichage
         affichage.repaint();
     }
 
