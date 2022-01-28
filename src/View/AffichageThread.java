@@ -19,18 +19,22 @@ public class AffichageThread extends Thread{
 
     @Override
     public void run (){
-        //Boucle infinie
-        while(true){
+        //Continue de run tant que testPerdu n'est pas faux
+        while(!etat.testPerdu()){
             //Recalcule tout en fonction de ce qui a ete ajoute
             //et supprime
             affichage.revalidate();
             //Reaffiche tout
             affichage.repaint();
+            //Test de defaite
+            etat.testPerdu();
             //try and catch basique faisant faire une pause
             //de 300ms a notre boucle
-            try { Thread.sleep(300);}
+            try { Thread.sleep(50);}
             catch (Exception e) { e.printStackTrace(); }
+
         }
 
+        affichage.affichageFinPartie();
     }
 }

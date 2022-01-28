@@ -1,15 +1,15 @@
 package Control;
 import Model.Etat;
 import View.Affichage;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
 
 public class Control implements MouseListener {
+
     //Declaration d'un affichage
     public static Affichage affichage;
+
     //declaration d'un etat
     public static Etat etat;
 

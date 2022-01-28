@@ -36,10 +36,9 @@ public class Parcours {
     void InitPoint(){
         //Initialisation du premier point
         int x = Affichage.getCentreXOval();
-        int y = Etat.HAUTEUR + Affichage.getHauteurOvale()/2;
+        int y = Etat.TOPOVALE + Etat.getHauteurOvale()/2;
         Point p = new Point(x,y);
         point.add(p);
-
         //Creation de tous les autres points du parcours
         while(x <= Etat.getWIDTHMAX()){
             x += 75+rand.nextInt(20);

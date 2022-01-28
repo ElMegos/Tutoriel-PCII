@@ -16,8 +16,8 @@ public class Voler extends Thread{
 
     @Override
     public void run (){
-        //Boucle infinie
-        while(true){
+        //Continue de run tant que testPerdu n'est pas faux
+        while(!etat.testPerdu()){
             //Fais descendre l'ovale
             etat.moveDown();
             //Try and catch basique faisant faire une pause

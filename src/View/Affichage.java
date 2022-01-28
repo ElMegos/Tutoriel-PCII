@@ -3,7 +3,6 @@ package View;
 import Control.Control;
 import Model.Etat;
 
-
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
@@ -12,17 +11,12 @@ import java.util.ArrayList;
 //Extends JPanel pour l'afficahge
 public class Affichage extends JPanel {
 
-    /**
-     * Const : Largeur de l'ovale
-     */
-    public static final int LARGEUR_OVALE = 20;
-    /**
-     * Const : Hauteur de l'ovale
-     */
-    public static final int HAUTEUR_OVALE = 100;
 
     //Declaration d'un etat
     public static Etat etat;
+
+    //Affichage de la fenetre de jeu et ajout du MouseListener
+    JFrame fenetre = new JFrame("FLAPPY BIRD WISH");
 
     //Constructeur de la classe
     public  Affichage(Etat etat){
@@ -30,8 +24,7 @@ public class Affichage extends JPanel {
         //Commence le Thread de l'affichage
         (new AffichageThread(this.etat , this)).start();
 
-        //Affichage de la fenetre de jeu et ajout du MouseListener
-        JFrame fenetre = new JFrame("FLAPPY BIRD WISH");
+        //Creation de la fenetre et ses dimensions
         fenetre.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setPreferredSize(new Dimension(this.etat.getWIDTH(), this.etat.getHEIGHTMAX()));
         fenetre.add(this);
@@ -39,8 +32,19 @@ public class Affichage extends JPanel {
         fenetre.pack();
         fenetre.setVisible(true);
 
+
     }
 
+    /**
+     * Affiche une fenetre contextuelle de fin de partie avec le score et ferme le jeu
+     * lorsque l'on ferme la fenetre
+     */
+    public void affichageFinPartie() {
+        //Cree une fenetre de dialogue qui affiche le score et qui empeche de cliquer sur le jeu tant qu'elle est visible
+        JOptionPane.showMessageDialog(fenetre,"Votre Score : " + etat.parcours.getPOSITION()/2, "FIN DE PARTIE", JOptionPane.PLAIN_MESSAGE);
+        //Exit le jeu
+        System.exit(0);
+    }
 
     /**
      * Methode qui gere tout l'affichage du jeu
@@ -53,7 +57,7 @@ public class Affichage extends JPanel {
         super.paint(g);
 
         //Dessine l'ovale
-        g.drawOval(40,this.etat.getHAUTEUR(), LARGEUR_OVALE, HAUTEUR_OVALE);
+        g.drawOval(this.etat.getPOSITIONX(),this.etat.getTOPOVALE(), this.etat.getLargeurOvale(), this.etat.getHauteurOvale());
 
         //Affichage de la ligne brisee
         //ArrayList avec le parcours a afficher
@@ -75,30 +79,12 @@ public class Affichage extends JPanel {
 
 
 
-
-    /**
-     * Renvoie la valeur de la largeur de l'oval
-     * @return
-     */
-    public static int getLargeurOvale() {
-        return LARGEUR_OVALE;
-    }
-
-
-    /**
-     * Renvoie la valeur de la hauteur de l'oval
-     * @return
-     */
-    public static int getHauteurOvale() {
-        return HAUTEUR_OVALE;
-    }
-
     /**
      * Renvoie la valeur du milieu de l'oval
      * @return
      */
     public static int getCentreXOval(){
-        return etat.HAUTEUR/2;
+        return etat.TOPOVALE /2;
     }
 
 }
