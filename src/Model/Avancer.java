@@ -19,6 +19,10 @@ public class Avancer extends Thread{
 
     @Override
     public void run (){
+        //try and catch basique faisant faire une pause
+        //de 3000ms avant de lancer notre boucle
+        try { Thread.sleep(3000);}
+        catch (Exception e) { e.printStackTrace(); }
         //Continue de run tant que testPerdu n'est pas faux
         while(!etat.testPerdu()){
             //Fait avancer le parcours en mettant
